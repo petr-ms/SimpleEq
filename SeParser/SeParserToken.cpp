@@ -1,44 +1,35 @@
 #include "SeParserToken.h"
 
+template SeParserTokenInstance<double>::SeParserTokenInstance(SeParserTokenId tkType, double value);
+template SeParserTokenInstance<std::string>::SeParserTokenInstance(SeParserTokenId tkType, std::string value);
 
-SeParserToken::SeParserToken(SeParserTokenId tkType)
+SeParserTokenModel::SeParserTokenModel(SeParserTokenId tkType)
 {
-	tokenType = tkType;
+	this->tokenId = tkType;
 }
 
-SeParserToken::~SeParserToken()
-{
-}
-
-SeParserTokenId SeParserToken::GetTokenId() const
-{
-	return tokenType;
-}
-
-SeParserDecimalNumberToken::SeParserDecimalNumberToken(SeParserTokenId tkType, double value) : SeParserToken(tkType)
-{
-	dValue = value;
-}
-
-SeParserDecimalNumberToken::~SeParserDecimalNumberToken()
+SeParserTokenModel::~SeParserTokenModel()
 {
 }
 
-double SeParserDecimalNumberToken::GetValue() const
+SeParserTokenId SeParserTokenModel::GetTokenId() const
 {
-	return this->dValue;
+	return this->tokenId;
 }
 
-SeParserIdentifierToken::SeParserIdentifierToken(SeParserTokenId tkType, std::string value) :SeParserToken(tkType)
+template <typename T>
+SeParserTokenInstance<T>::SeParserTokenInstance(SeParserTokenId tkType, T value) :SeParserTokenModel(tkType)
 {
-	this->sValue = value;
+	this->tokenValue = value;
 }
 
-SeParserIdentifierToken::~SeParserIdentifierToken()
+template <typename T>
+SeParserTokenInstance<T>::~SeParserTokenInstance()
 {
 }
 
-std::string SeParserIdentifierToken::GetValue() const
+template <typename T>
+T SeParserTokenInstance<T>::GetValue() const
 {
-	return this->sValue;
+	return this->tokenValue;
 }

@@ -1,7 +1,7 @@
 #pragma once
-#include <string>
 
 //#include "Platform.h"
+#include <string>
 
 enum SeParserTokenId
 {
@@ -15,44 +15,40 @@ enum SeParserTokenId
 	GE = 7,
 	LE = 8,
 	EQ = 9,
-	VARIABLE = 10,
+	IDENTIFIER = 10,
 	FUNCTION = 11,
 	DECIMAL_NUMBER = 12
 };
 
-class SeParserToken
+
+class SeParserTokenModel
 {
 public:
-	explicit SeParserToken(SeParserTokenId tkType);
-	virtual ~SeParserToken();
+	explicit SeParserTokenModel(SeParserTokenId tkType);
+	virtual ~SeParserTokenModel();
 
 	SeParserTokenId GetTokenId() const;
-private:
-	SeParserTokenId tokenType;
-	std::string tokenValue;
 
+private:
+	SeParserTokenId tokenId;
 };
 
-class SeParserDecimalNumberToken : public SeParserToken
+
+template <typename T> class SeParserTokenInstance : public SeParserTokenModel
 {
 public:
-	explicit SeParserDecimalNumberToken(SeParserTokenId tkType, double value);
-	~SeParserDecimalNumberToken();
+	//template<typename T>
+	explicit SeParserTokenInstance(SeParserTokenId tkType, T value);
+	virtual ~SeParserTokenInstance() override;
 
-	double GetValue() const;
+	T GetValue() const;
 private:
-	double dValue;
+	T tokenValue;
 };
 
-class SeParserIdentifierToken : public SeParserToken
-{
-public:
-	explicit SeParserIdentifierToken(SeParserTokenId tkType, std::string value);
-	~SeParserIdentifierToken();
 
-	std::string GetValue() const;
-private:
-	std::string sValue;
-};
+//template class SeParserTokenInstance<double>;
+//template class SeParserTokenInstance<std::string>;
+
 
 

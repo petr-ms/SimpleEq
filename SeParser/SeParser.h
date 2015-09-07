@@ -1,6 +1,7 @@
 #pragma once
-#include "Platform.h"
+
 #include "SeParserToken.h"
+#include "Platform.h"
 
 //#include <string>;
 
@@ -12,10 +13,11 @@ public:
 	void ext ShowMessage();
 	void ext Parse(std::string);
 	
-	SeParserToken getNextToken();
-	SeParserToken parseDecimalNumber();
-	SeParserToken parseIdentifier();
 private:
+	SeParserTokenModel* getNextToken();
+	SeParserTokenModel* parseDecimalNumber();
+	SeParserTokenModel* parseIdentifier();
+
 	char decimalSeparator;
 	std::string parsingExpression;
 	int parsingExpressionLength;
