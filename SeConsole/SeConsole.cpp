@@ -12,7 +12,7 @@ int main(int argc, _TCHAR* argv[])
 {
 	string testExpr = "1*x + 10 = 0";
 	auto parser = new SeParser();
-	parser->Parse(testExpr);
+	//parser->Parse(testExpr);
 
 	return 0;
 }
